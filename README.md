@@ -6,10 +6,14 @@ This is a simple service where you can store/get/delete files.
 
 You can run the tests with
 
+
+````
 gradle test
+````
 
 To test the application you can
 
+````
 gradle clean build distZip
 
 cd build/distributions/
@@ -19,6 +23,7 @@ unzip file-manager-service.zip
 cd file-manager-service/bin
 
 ./file-manager-service.sh --file-path /tmp/files
+````
 
 You can then upload multiple files using curl, e.g.,
 
