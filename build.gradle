@@ -1,0 +1,61 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'scala'
+apply plugin: 'java-library-distribution'
+
+idea {
+  project {
+    //if you want to set specific jdk and language level
+    jdkName = '1.7'
+    languageLevel = '1.7'
+  }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.1'
+}
+
+jar.doFirst {
+        sourceSets.main.output.resourcesDir = "/dev/null2"
+}
+jar.doLast {
+        sourceSets.main.output.resourcesDir = sourceSets.main.output.classesDir
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+        scala           = 'org.scala-lang:scala-library:2.11.4'
+        scalaTools = 'org.scala-lang:scala-compiler:2.11.4'
+        scalaTest       = 'org.scalatest:scalatest_2.11:2.2.2'
+        sprayCan = 'io.spray:spray-can_2.11:1.3.2'
+        sprayRouting = 'io.spray:spray-routing_2.11:1.3.2'
+        sprayJson = 'io.spray:spray-json_2.11:1.3.1'
+        akkaActor    =  'com.typesafe.akka:akka-actor_2.11:2.3.7'
+        commonsCli = 'commons-cli:commons-cli:1.2'
+        testKit = 'io.spray:spray-testkit:1.3.1'
+        junit           = 'junit:junit:4.11'
+}
+
+
+
+dependencies {
+    compile scala
+	compile sprayCan
+	compile sprayRouting
+	compile sprayJson
+	compile akkaActor
+    compile commonsCli
+    testCompile testKit
+    testCompile scalaTest
+    testCompile junit
+}
+
+distributions {
+    main{
+        baseName = 'file-manager-service'
+    }
+}
+
